@@ -1,82 +1,77 @@
 # BookStore MERN E-Commerce
 
-A production-ready MERN bookstore with Docker, JWT authentication, role-based authorization, books, orders, reviews, and admin management.
+A full-stack MERN bookstore for browsing books, managing a cart, placing orders, leaving reviews, and using admin tools for content and order management.
 
 ## Features
 
-- JWT authentication with user and admin roles
+- JWT authentication
+- Role-based access for users and admins
 - Book catalog with search and filtering
 - Shopping cart with localStorage persistence
 - Checkout and order tracking
+- Review submission and management
 - Admin dashboard for books, orders, and users
-- MongoDB, Express, React, Node.js
-- Docker Compose development and production setups
 
 ## Project Structure
 
-- server: Express API, MongoDB models, controllers, routes, middleware, seed script
-- client: React UI, routing, state context, services, components, pages
-- docker-compose.yml: development orchestration
-- docker-compose.prod.yml: production orchestration
+- backend: Express API, MongoDB models, controllers, routes, middleware, and upload handling
+- frontend: React UI, routing, state context, services, components, and pages
 
 ## Prerequisites
 
-- Docker
-- Docker Compose
+- Node.js
+- npm
+- MongoDB running locally or a MongoDB connection string
 
 ## Setup
 
-1. Copy environment files
+1. Install dependencies
 
-   - Use the root .env.example as a starting point
-   - Use server/.env.example and client/.env.example if you want service-specific overrides
+   - cd backend && npm install
+   - cd ../frontend && npm install
 
-2. Build and run development environment
+2. Configure environment variables
 
-   - docker-compose up -d
-   - docker-compose ps
-   - docker-compose logs -f
-   - docker-compose down
+   Backend environment:
 
-3. Seed the database
+   - NODE_ENV
+   - PORT
+   - MONGODB_URI
+   - JWT_SECRET
+   - CLIENT_URL
 
-   - docker-compose exec backend npm run seed
+   Frontend environment:
+
+   - VITE_API_URL
+
+3. Start the backend
+
+   - cd backend
+   - npm run dev
+
+4. Start the frontend
+
+   - cd frontend
+   - npm run dev
 
 ## Development Commands
 
-- docker-compose up -d
-- docker-compose down
-- docker-compose logs -f
-- docker-compose ps
-- docker-compose build
-- docker-compose up -d mongodb
-- docker-compose up -d backend
-- docker-compose up -d frontend
+Backend:
 
-## Production Commands
+- npm run dev
+- npm start
 
-- docker-compose -f docker-compose.prod.yml up -d --build
-- docker-compose -f docker-compose.prod.yml down
-- docker-compose -f docker-compose.prod.yml logs -f
+Frontend:
 
-## Environment Variables
-
-Required variables:
-
-- NODE_ENV
-- MONGODB_URI
-- JWT_SECRET
-- PORT
-- CLIENT_URL
-- VITE_API_URL
-- SEED_ON_START
+- npm run dev
+- npm run build
+- npm run preview
 
 ## Default URLs
 
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000/api
-- Mongo Express: http://localhost:8081
-- MongoDB: mongodb://localhost:27017
+- Health check: http://localhost:5000/api/health
 
 ## API Endpoints
 
@@ -121,23 +116,3 @@ Required variables:
 - DELETE /api/admin/books/:id
 - PUT /api/admin/orders/:id/status
 
-## Seed Data
-
-The seed script creates:
-
-- 1 admin user
-- 1 sample user
-- 10 books
-- sample order
-- sample reviews
-
-Default admin credentials:
-
-- email: admin@bookstore.com
-- password: Admin@123
-
-## Notes
-
-- Frontend API calls use the backend service name inside Docker.
-- Backend connects to MongoDB using the mongodb service name.
-- Health check endpoint: /api/health
